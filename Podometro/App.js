@@ -10,8 +10,8 @@ export default function App() {
   const [currentTime, setCurrentTime]= useState("Pomo"|"Short"|"Break");
   return (
     //Este elemento permite en los ios poder poner los objetos son tocar el barra superior
-<SafeAreaView styles={styles.container}>
-    <View style={{paddingTop: Platform.OS === "android" && 30}}>
+<SafeAreaView styles={[styles.container]}>
+    <View style={{paddingTop: Platform.OS === "android" && 30, backgroundColor:colors[currentTime]}}>
       <Text style={styles.text}>Podometro</Text>
       <Text>{time}</Text>
       <Header
