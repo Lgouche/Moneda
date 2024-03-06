@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet,Platform, Text, View, Button, SafeAreaView } from 'react-native';
 import { useState } from 'react';
+import Header from './src/components/Header';
 
 const colors = ["#F7DC6F","#A2D9CE","#D7BDE2"];
 export default function App() {
@@ -12,7 +13,10 @@ export default function App() {
 <SafeAreaView styles={styles.container}>
     <View style={{paddingTop: Platform.OS === "android" && 30}}>
       <Text style={styles.text}>Podometro</Text>
-      <StatusBar style="auto" />
+      <Header
+       currentTime={currentTime}
+       setCurrentTime={setCurrentTime}
+        time={time}/>
     </View>
 </SafeAreaView>
   );
