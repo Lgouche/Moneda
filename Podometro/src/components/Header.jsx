@@ -17,7 +17,7 @@ return(
                 style={[styles.itemStyle, currentTime !== index && {borderColor:"transparent"}] }
                 onPress={()=> handlePress(index)}
                 >
-                <Text>{item}</Text>
+                <Text style={{fontWeight:"bold"}}>{item}</Text>
             </TouchableOpacity>
         ))}
         
@@ -27,9 +27,12 @@ return(
 const styles = StyleSheet.create({
     itemStyle: {
         width:"33%",
-
         borderWidth:3,
         padding:5,
+        borderColor:"white",
+        marginVertical:20,
+        borderRadius:10,
+        alignItems:"center"
 
     }
 }) 
