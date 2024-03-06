@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet,Platform, Text, View, Button, SafeAreaView } from 'react-native';
-import { useState } from 'react';
+import { StyleSheet,Platform, Text, View, Button, SafeAreaView, TouchableOpacity } from 'react-native';
+import { useEffect, useState } from 'react';
 import Header from './src/components/Header';
 import Timer from './src/components/Timer';
 
@@ -9,6 +9,28 @@ export default function App() {
   const [isWorking, setIsWorking] = useState(false);
   const [time, setTime] = useState(25*60);
   const [currentTime, setCurrentTime]= useState("Pomo"|"Short"|"Break");
+  const [isActive,setIsActive]=useState(false)
+
+  useEffect(()=>{
+    let interval=null;
+    if(isActive){
+      //run
+      interval = setInterval(()=>{
+        setTime(time-1);
+      },1000);
+    } else {
+      //clear
+      clearInterval(interval);
+    }
+    return()=> clearInterval(interval);
+  },[isActive,time])
+
+
+  function handlerStartStop() {
+    setIsActive(!isActive);
+  }
+
+
   return (
     //Este elemento permite en los ios poder poner los objetos son tocar el barra superior
 <SafeAreaView styles={[styles.container]}>
@@ -20,7 +42,9 @@ export default function App() {
        setCurrentTime={setCurrentTime}
        setTime={setTime}/>
        <Timer time={time}/>
-       
+       <TouchableOpacity style={styles.button} onPress={handlerStartStop}>
+        <Text style={{color:"white",fontWeight:"bold"}}>{isActive ? "Stop" : "Start"}</Text>
+       </TouchableOpacity>
     </View>
 </SafeAreaView>
   );
@@ -36,6 +60,13 @@ const styles = StyleSheet.create({
   },
   fullScream:{
     flex:1
+  },
+  button: {
+    backgroundColor:"#333333",
+    padding:15,
+    borderRadius:15,
+    marginTop:15,
+    alignItems:"center"
   }
 
 });
