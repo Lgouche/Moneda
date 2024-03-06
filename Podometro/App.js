@@ -13,10 +13,11 @@ export default function App() {
 <SafeAreaView styles={styles.container}>
     <View style={{paddingTop: Platform.OS === "android" && 30}}>
       <Text style={styles.text}>Podometro</Text>
+      <Text>{time}</Text>
       <Header
        currentTime={currentTime}
        setCurrentTime={setCurrentTime}
-        time={time}/>
+       setTime={setTime}/>
     </View>
 </SafeAreaView>
   );
